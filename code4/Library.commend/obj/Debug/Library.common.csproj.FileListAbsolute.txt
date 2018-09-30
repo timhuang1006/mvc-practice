@@ -1,0 +1,10 @@
+C:\Users\tim\Desktop\ccde4\Library.commend\bin\Debug\Library.commend.dll
+C:\Users\tim\Desktop\ccde4\Library.commend\bin\Debug\Library.commend.pdb
+C:\Users\tim\Desktop\ccde4\Library.commend\obj\Debug\Library.common.csprojResolveAssemblyReference.cache
+C:\Users\tim\Desktop\ccde4\Library.commend\obj\Debug\Library.commend.dll
+C:\Users\tim\Desktop\ccde4\Library.commend\obj\Debug\Library.commend.pdb
+C:\Users\tim\Documents\tim\code4\Library.commend\bin\Debug\Library.commend.dll
+C:\Users\tim\Documents\tim\code4\Library.commend\bin\Debug\Library.commend.pdb
+C:\Users\tim\Documents\tim\code4\Library.commend\obj\Debug\Library.common.csprojResolveAssemblyReference.cache
+C:\Users\tim\Documents\tim\code4\Library.commend\obj\Debug\Library.commend.dll
+C:\Users\tim\Documents\tim\code4\Library.commend\obj\Debug\Library.commend.pdb

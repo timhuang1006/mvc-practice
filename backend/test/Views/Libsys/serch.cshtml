@@ -1,0 +1,206 @@
+﻿ 
+
+@{
+    ViewBag.Title = "serch";
+}
+
+<h2><strong>查詢</strong></h2>
+
+<div class="form-horizontal">
+	<h4>圖書維護</h4>
+ 
+	<div class="form-group">
+			<input id="bookname" value="" />
+		<div class="col-md-2">
+			<label for="bookname">書名	</label>
+		</div>
+	</div>
+
+	<div class="form-group">
+			<input id="catorogry" value="" />
+		<div class="col-md-2">
+			<label for="catorogry">圖書類別</label>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<input id="bookuser" value="" />
+		<div class="col-md-2">
+			<label for="bookuser">借閱人</label>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<input id="bookstatus" value="" />
+		<div class="col-md-2">
+			<label for="bookstatus">借閱狀態</label>
+		</div>
+	</div>
+
+	<button class="k-button" id="search" >查詢</button>
+	<button class="k-button" id="clear" onclick="window.location.href = '/Libsys/serch'">清除</button>
+	<button class="k-button" onclick="window.location.href = '/Libsys/create'">新增</button> @*跳轉畫面*@
+</div>
+
+
+<div class="k-grouping-header" data-role="droptarget">123</div>
+<div id="grid"></div>
+
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+			$("#catorogry").kendoDropDownList({
+				dataTextField: "Text",
+				dataValueField: "Value",
+				optionLabel: "請選擇...",
+				dataSource: {
+					transport: {
+						read: {
+							url: "/Libsys/GetCatorogry",
+							type: "post"
+						}
+					}
+				}
+			});
+			
+			//function myfunction(a,b) {
+			//	$(a).kendoDropDownList({
+			//		dataTextField: "Text",
+			//		dataValueField: "Value",
+			//		optionLabel: "請選擇...",
+			//		dataSource: {
+			//			transport: {
+			//				read: {
+			//					url: b,
+			//					type: "post"
+			//				}
+			//			}
+			//		}
+			//	});
+			//}
+
+			//myfunction("#bookuser", "/Libsys/Getusernsame")
+
+			$("#search").click(function () {
+		
+				$.ajax({
+					type: "POST",
+					url: "/Libsys/Getdetials",
+					data: {
+							Bookname: $("#bookname").val(),
+							bookcatorory: $("#catorogry").val(),
+							status: $("#bookstatus").val(),
+							user: $("#bookuser").val()
+					},
+					dataType: "json",
+					success: function (response) {
+						$("#grid").data("kendoGrid").dataSource.data(response);
+					}, error: function (error) {
+						alert("系統發生錯誤");
+					}
+				});
+			});
+
+			$("#bookuser").kendoDropDownList({
+				dataTextField: "Text",
+				dataValueField: "Value",
+				optionLabel: "請選擇...",
+				dataSource: {
+					transport: {
+						read: {
+							url: "/Libsys/Getusernsame",
+							type: "post"
+						}
+					}
+				}
+			});
+
+			$("#bookstatus").kendoDropDownList({
+				dataTextField: "Text",
+				dataValueField: "Value",
+				optionLabel: "請選擇...",
+				dataSource: {
+					transport: {
+						read: {
+							url: "/Libsys/GetStatus",
+							type: "post"
+						}
+					}
+				}
+			})
+
+
+
+			$("#grid").kendoGrid({
+				dataSource: {
+					data: [],
+					schema: {
+						model: {
+							fields: {
+								BOOK_ID: { type: "string" },
+								bookcatorory: { type: "string" },
+								Bookname: { type: "string" },
+								bookuser: { type: "string" },
+								status: { type: "string" },
+								user: { type: "string" },
+							}
+						}
+					},
+					pageSize: 20
+				},
+				height: 300,
+				scrollable: true,
+				sortable: true,
+				filterable: false,
+				pageable: {
+					input: true,
+					numeric: false
+				},
+				columns: [
+					{ field: "BOOK_ID", hidden: true },	//title: "id", width: "10px" 
+					{ field: "bookcatorory", title: "圖書類別", width: "100px" },
+					{ field: "Bookname", title: "書名", width: "350px" },
+					{ field: "bookuser", title: "購書日期", width: "150px" },
+					{ field: "status", title: "借閱狀態", width: "100px" },
+					{ field: "user", title: "借閱人", width: "90px" },
+					{ command: { text: "修改", click: Modify }, title: "&nbsp;", width: "80px" },
+					{ command: { text: "刪除" ,click:Delete}, title: "&nbsp;", width: "80px" }
+				],
+			});
+		});
+
+		function Modify(e) {
+			var data = this.dataItem($(e.currentTarget).closest("tr"));
+			var url = '/Lib/edit?bookid=' + data.BOOK_ID;
+			location.href = url;
+		}
+
+
+
+
+
+
+		function Delete(e) {
+			e.preventDefault();
+			if (confirm("想清楚喔!!")) {
+				 
+				var trData = this.dataItem($(e.currentTarget).closest("tr"));
+				debugger;
+				$.ajax({
+					type: "POST",
+					url: "/Libsys/Delete",
+					data: "BOOK_ID=" + trData.BOOK_ID,
+					dataType: "json",
+					success: function (response) {
+						alert("刪除成功");
+						$("#search").click();
+					}, error: function (error) {
+						alert("系統發生錯誤");
+					}
+				});
+			} else {
+				alert("取消");
+			}
+		}
+
+	</script>

@@ -1,0 +1,52 @@
+﻿
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 id="demo_result">Index</h2>
+
+<body>
+
+	<h1 id="demo_feedback"></h1>
+	<input id="demo_input" type="text" name="name" value="" />
+	<button id="btn_callajax">call ajax</button>
+	<select id="demo_select">	123</select>
+	<button id="btn_demo_select">DropDownList</button>
+
+</body>
+
+
+
+
+
+<script>
+	$("#btn_callajax").click(function(){
+	  
+		$.ajax({
+			url: "Gettestdata",
+			dataType: "json",
+			data: { "teststring": $("#demo_input").val() },
+			type:  "POST"
+			}).done(function(data){
+				$("#demo_result").text(data);
+				$("#demo_feedback").text('screw u');
+			})
+	});
+
+	$("#btn_demo_select").click(function () {
+		$("#demo_select").kendoDropDownList({
+			dataSource: {
+				transport: {
+					read: {
+						url: "Gettestdatadropdownlist",
+						type: "post",
+						dataType: "json"
+					}
+				}
+			},
+			//dataTextField: "text",
+			//dataValueField: "value",
+		});
+	});
+</script>

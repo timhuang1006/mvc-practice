@@ -1,0 +1,99 @@
+﻿@model libmaintain.Models.createbook
+
+@{
+    ViewBag.Title = "新增";
+}
+
+<h2>新增</h2>
+
+
+	<div class="form-horizontal">
+		<h4>新增</h4>
+		<hr />
+
+		<div class="form-group">
+			<input id="bookname" value="" />
+			<div class="col-md-2">
+				<label for="bookname"><span style="color:red">*</span>書名</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<input id="author" value="" />
+			<div class="col-md-2">
+				<label for="author"><span style="color:red">*</span>作者	</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<input id="publisher" value="" />
+			<div class="col-md-2">
+				<label for="publisher"><span style="color:red">*</span>出版商	</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<input id="introduction" value="" />
+			<div class="col-md-2">
+				<label for="introduction"><span style="color:red">*</span>內容簡介	</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<input id="buydate" value="" />
+			<div class="col-md-2">
+				<label for="buydate"><span style="color:red">*</span>購買日期	</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<input id="bookcatorory" value="" />
+			<div class="col-md-2">
+				<label for="bookcatorory"><span style="color:red">*</span>圖書類別	</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input  id="create"   type="submit" value="新增" class="k-button" />
+				<button class="k-button" onclick="window.location.href = '/Libsys/serch'">查詢</button>
+			</div>
+		</div>
+	</div>
+
+
+<script >
+	$(document).ready(function () {
+		$("#bookcatorory").kendoDropDownList({
+			dataTextField: "Text",
+			dataValueField: "Value",
+			optionLabel: "請選擇...",
+			dataSource: {
+				transport: {
+					read: {
+						url: "/Libsys/GetCatorogry",
+						type: "post"
+					}
+				}
+			}
+		});
+
+		$("#buydate").kendoDatePicker();  // datePicker
+
+		$("#create").click(function () {
+
+			$.ajax({
+				type: "POST",
+				url: "/Libsys/Createdetials",
+				data: {
+						bookname: $("#bookname").val(),
+						author: $("#author").val(),
+						publisher: $("#publisher").val(),
+						introduction: $("#introduction").val(),
+						buydate: $("#buydate").val(),
+						bookcatorory: $("#bookcatorory").data("kendoDropDownList").value()
+				},
+				dataType: "json",
+				success: function (response) {
+					alert("success");
+				}, error: function (error) {
+					alert("系統發生錯誤");
+				}
+			});
+		});
+		})
+</script>

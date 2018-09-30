@@ -1,0 +1,2 @@
+C:\Users\tim\Desktop\ccde4\Library.service\obj\Debug\Library.service.csprojResolveAssemblyReference.cache
+C:\Users\tim\Documents\tim\code4\Library.service\obj\Debug\Library.service.csprojResolveAssemblyReference.cache

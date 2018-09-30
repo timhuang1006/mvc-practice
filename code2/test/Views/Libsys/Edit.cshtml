@@ -1,0 +1,97 @@
+﻿@model libmaintain.Models.EditBook
+
+@{
+    ViewBag.Title = "edit";
+}
+
+<h2>edit</h2>
+
+@using (Html.BeginForm("EditBook", "Libsys"))
+	{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>edit</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.bookname, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.bookname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.bookname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.author, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.author, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.author, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.publisher, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.publisher, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.publisher, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.introduction, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.introduction, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.introduction, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.buydate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+				@Html.EditorFor(model => model.buydate, new { htmlAttributes = new { @class = "form-control", @type = "Date" } })
+                @Html.ValidationMessageFor(model => model.buydate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.bookcatorory, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.bookcatorory, (List<SelectListItem>)ViewBag.BOOK_CLASS_NAME, "請選擇", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.bookcatorory, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownListFor(model => model.status, (List<SelectListItem>)ViewBag.BOOK_CLASS_NAME, "請選擇", new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownListFor(model => model.status, (List<SelectListItem>)ViewBag.CODE_NAME, "請選擇", new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="刪除" class="btn btn-default" />
+				<input type="submit" value="存檔" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Search")
+</div>
+
+
+
+

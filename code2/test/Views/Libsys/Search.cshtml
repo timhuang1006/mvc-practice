@@ -1,0 +1,119 @@
+﻿@model libmaintain.Models.Search
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2><strong>查詢</strong></h2>
+
+    @Html.AntiForgeryToken()
+@using (Html.BeginForm("Search", "Libsys", FormMethod.Post, new { id = "Form1" }))
+{
+
+	<div class="form-horizontal">
+		<h4>圖書維護</h4>
+		<hr />
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		<div class="form-group">
+			@Html.LabelFor(model => model.BookName, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.BookName, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.BookName, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.BookCatorory, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownListFor(model => model.BookCatorory, (List<SelectListItem>)ViewBag.BOOK_CLASS_NAME, "請選擇", new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.BookCatorory, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.BookUser, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownListFor(model => model.BookUser, (List<SelectListItem>)ViewBag.USER_ENAME, "請選擇", new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.BookUser, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownListFor(model => model.Status, (List<SelectListItem>)ViewBag.CODE_NAME, "請選擇", new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+				<input type="submit" value="查詢" class="btn btn-default" />
+				@Html.ActionLink("新增", "create")
+				@Html.ActionLink("修改", "edit")
+			 
+			</div>
+		</div>
+		@if (ViewBag.SearchResult != null)
+		{
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr id>
+						<th>圖書類別</th>
+						<th>書名</th>
+						<th>購書日期</th>
+						<th>借閱狀態</th>
+						<th>借閱人</th>
+					
+						
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in (List<libmaintain.Models.Search>)ViewBag.SearchResult)
+					{
+						<tr id='@item.BookName'>
+							<td>@item.BookName</td>
+							<td>@item.BookCatorory </td>
+							<td>@item.BookUser </td>
+							<td>@item.Status</td>
+							<td>@item.User</td>
+						
+							<td>@Html.ActionLink("修改", "EditBook", new { id = item.BookName, @value = @item.BookName })</td>
+							<td>
+								<a class="btnDelete" href="#">刪除</a>
+								<input class="hidBookId" type="hidden" value='@item.BookId' />
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		}
+</div>
+					}
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Search")
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+    	$(".btnDelete").click(function (e) {
+    		if (confirm("是否刪除!!")) {
+    			e.preventDefault();
+    			var tr = $(this).closest('tr')
+    			debugger;
+    			$.ajax({
+    				type: "POST",
+    				url: "/Libsys/Delete",
+    				data: "BookId=" + $(this).next().val(),
+    				dataType: "json",
+    				success: function (response) {
+    					alert("刪除成功");
+    					$(tr).remove();
+    				}, error: function (error) {
+    					alert("系統發生錯誤");
+    				}
+    			});
+    		} else {
+    			alert("已取消");
+    		}
+        });
+    });
+</script>

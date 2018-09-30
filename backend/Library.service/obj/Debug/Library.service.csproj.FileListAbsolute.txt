@@ -1,0 +1,14 @@
+C:\Users\tim\Desktop\ccde4\Library.service\obj\Debug\Library.service.csprojResolveAssemblyReference.cache
+C:\Users\tim\Desktop\ccde4\Library.service\bin\Debug\Library.Service.dll
+C:\Users\tim\Desktop\ccde4\Library.service\bin\Debug\Library.Service.pdb
+C:\Users\tim\Desktop\ccde4\Library.service\bin\Debug\Library.commend.dll
+C:\Users\tim\Desktop\ccde4\Library.service\bin\Debug\Library.Dao.dll
+C:\Users\tim\Desktop\ccde4\Library.service\bin\Debug\Library.Model.dll
+C:\Users\tim\Desktop\ccde4\Library.service\bin\Debug\System.Web.Mvc.dll
+C:\Users\tim\Desktop\ccde4\Library.service\bin\Debug\Library.commend.pdb
+C:\Users\tim\Desktop\ccde4\Library.service\bin\Debug\Library.Dao.pdb
+C:\Users\tim\Desktop\ccde4\Library.service\bin\Debug\Library.Model.pdb
+C:\Users\tim\Desktop\ccde4\Library.service\bin\Debug\System.Web.Mvc.xml
+C:\Users\tim\Desktop\ccde4\Library.service\bin\Debug\zh-Hant\System.Web.Mvc.resources.dll
+C:\Users\tim\Desktop\ccde4\Library.service\obj\Debug\Library.Service.dll
+C:\Users\tim\Desktop\ccde4\Library.service\obj\Debug\Library.Service.pdb

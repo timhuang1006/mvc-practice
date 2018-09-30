@@ -1,0 +1,12 @@
+C:\Users\tim\Desktop\ccde4\Library.Dao\obj\Debug\Library.Dao.csprojResolveAssemblyReference.cache
+C:\Users\tim\Desktop\ccde4\Library.Dao\bin\Debug\Library.Dao.dll
+C:\Users\tim\Desktop\ccde4\Library.Dao\bin\Debug\Library.Dao.pdb
+C:\Users\tim\Desktop\ccde4\Library.Dao\bin\Debug\Library.commend.dll
+C:\Users\tim\Desktop\ccde4\Library.Dao\bin\Debug\Library.Model.dll
+C:\Users\tim\Desktop\ccde4\Library.Dao\bin\Debug\System.Web.Mvc.dll
+C:\Users\tim\Desktop\ccde4\Library.Dao\bin\Debug\Library.commend.pdb
+C:\Users\tim\Desktop\ccde4\Library.Dao\bin\Debug\Library.Model.pdb
+C:\Users\tim\Desktop\ccde4\Library.Dao\bin\Debug\System.Web.Mvc.xml
+C:\Users\tim\Desktop\ccde4\Library.Dao\bin\Debug\zh-Hant\System.Web.Mvc.resources.dll
+C:\Users\tim\Desktop\ccde4\Library.Dao\obj\Debug\Library.Dao.dll
+C:\Users\tim\Desktop\ccde4\Library.Dao\obj\Debug\Library.Dao.pdb

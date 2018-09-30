@@ -1,0 +1,174 @@
+﻿@model libmaintain.Models.editbook
+
+@{
+    ViewBag.Title = "edit";
+}
+
+<h2>修改</h2>
+
+
+    
+    <div class="form-horizontal">
+        <h4>edit</h4>
+        <hr />
+       
+		<div class="form-group">
+			<input id="bookname" value="" />
+			<div class="col-md-2">
+				<label for="bookname">書名	</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<input id="author" value="" />
+			<div class="col-md-2">
+				<label for="author">作者	</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<input id="publisher" value="" />
+			<div class="col-md-2">
+				<label for="publisher">出版商	</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<input id="introduction" value="" />
+			<div class="col-md-2">
+				<label for="introduction">內容簡介	</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<input id="buydate" value="" />
+			<div class="col-md-2">
+				<label for="buydate">購買日期	</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<input id="bookcatorory" value="" />
+			<div class="col-md-2">
+				<label for="bookcatorory">圖書類別	</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<input id="status" value="" />
+			<div class="col-md-2">
+				<label for="status">圖書狀態	</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<input id="bookuser" value="" />
+			<div class="col-md-2">
+				<label for="bookuser">借閱人	</label>
+			</div>
+		</div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="刪除" class="k-button" />
+				<input type="submit" value="存檔" class="k-button" id="save" />
+            </div>
+        </div>
+    </div>
+
+<script>
+	$(document).ready(function () {
+
+		var url = location.href;
+		if (url.indexOf('?') != -1) {
+			var ary1 = url.split('?');
+			var ary2 = ary1[1].split('&');
+			var ary3 = ary2[0].split('=');
+			var id = ary3[1];
+		}
+
+
+		$.ajax({
+			type: "POST",
+			url: "/Lib/ModifyBook",
+			data: {
+				bookId: id
+			},
+			dataType: "json",
+			success: function (response) {
+				$("#bookname").val(response.bookname);
+				$("#author").val(response.author);
+				$("#publisher").val(response.publisher);
+				$("#introduction").val(response.introduction);
+				$("#buydate").val(response.buydate);
+				$("#bookcatorory").data("kendoDropDownList").value(response.bookcatorory);
+				$("#status").data("kendoDropDownList").value(response.status);
+				$("#bookuser").data("kendoDropDownList").value(response.bookuser);
+			}
+		});
+
+		$("#bookcatorory").kendoDropDownList({
+			dataTextField: "Text",
+			dataValueField: "Value",
+			optionLabel: "請選擇...",
+			dataSource: {
+				transport: {
+					read: {
+						url: "/Libsys/GetCatorogry",
+						type: "post"
+					}
+				}
+			}
+		});
+		$("#status").kendoDropDownList({
+			dataTextField: "Text",
+			dataValueField: "Value",
+			optionLabel: "請選擇...",
+			dataSource: {
+				transport: {
+					read: {
+						url: "/Libsys/GetStatus",
+						type: "post"
+					}
+				}
+			}
+		});
+
+		$("#bookuser").kendoDropDownList({
+			dataTextField: "Text",
+			dataValueField: "Value",
+			optionLabel: "請選擇...",
+			dataSource: {
+				transport: {
+					read: {
+						url: "/Libsys/Getusernsame",
+						type: "post"
+					}
+				}
+			}
+		})
+
+		$("#buydate").kendoDatePicker();
+
+		//氣落
+
+		$("#save").click(function () {
+
+			$.ajax({
+				type: "POST",
+				url: "/Libsys/ModifyBook",
+				data: {
+					bookname: $("#bookname").val(),
+					author: $("#author").val(),
+					publisher: $("#publisher").val(),
+					introduction: $("#introduction").val(),
+					buydate: $("#buydate").val(),
+					bookcatorory: $("#bookcatorory").data("kendoDropDownList").value(),
+					status: $("#status").data("kendoDropDownList").value(),
+					bookuser: $("#bookuser").data("kendoDropDownList").value()
+				},
+				dataType: "json",
+				success: function (data) {
+					alert("success"),
+					location.href = '/Lib/serch'
+				}
+			});
+		});
+	})
+</script>
+
+
+
+
